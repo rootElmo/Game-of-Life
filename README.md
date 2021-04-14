@@ -19,6 +19,10 @@ Information on how to get the game running. Fill in later.
 
 1. Wikipedia - Game of Life https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
+2. Tsoding - Profun (using SDL, rendering logic) https://github.com/tsoding/profun/tree/master/procedural
+// Link to video later
 
+3. Dulhan Jayalath - GameOfLife (Game logic) https://github.com/armytricks/GameOfLife
+// Link to video later
 
 Created by Elmo Rohula 2021

@@ -55,11 +55,15 @@ void setCell(game_t *game, unsigned int x, unsigned int y){
     int x_left, x_right, y_left, y_right;
     unsigned char *cell_ptr = game->cell_map[(y * w) + x];
 
-    x_left = ();
+    if (foo)   then              else
+    (condition) ? expression true : expression false
+
+    x_left = (x == 0) ? w - 1 : -1;
 }
+
+*/
 
 void clickOnCell(game_t *game, unsigned int row, unsigned int col){
     toggleCell(game, row, col);
 }
 
-*/
