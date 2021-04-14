@@ -1,12 +1,10 @@
 # Game of Life
 
+## About
+
 This project is a C++ implementation of the **Game of Life** by **John Horton Conway** [Wikipedia article on "Game of Life"]().
 
 This project was created for a coding challenge/assignment by **Buutti Education**.
-
-# About
-
-Game of Life is a zero player game devised by John Horton Conway [(Wikipedia)](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). This project is a C++ adaptation of said game.
 
 # Prerequisites for running
 
