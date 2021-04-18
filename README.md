@@ -15,6 +15,10 @@ This project was created for a coding challenge/assignment by **Buutti Education
 
 Information on how to get the game running. Fill in later.
 
+Build command:
+
+    $ g++ -o ../build/game-of-life game.h logic.cpp main.cpp rendering.cpp `pkg-config --cflags --libs sdl2 SDL2_gfx`
+
 # References
 
 1. Wikipedia - Game of Life https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
