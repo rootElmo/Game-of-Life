@@ -58,21 +58,13 @@ void renderState(SDL_Renderer *renderer, unsigned int x, unsigned int y, bool st
 // Render cells from cellmap :)
 // Change function name later to sometihng like "renderMap" etc.
 void renderCells(SDL_Renderer *renderer, const game_t *game  /*, unsigned int x, unsigned int y */){
-    // for loops for x & y
-    // Render ACTUAL shapes here or do it in another function?
-
-    // ^^^ Render in another function, where calculations for the rendered
-    // cell's coordinates are made. 
 
     for (int i = 0; i < CELL_AMOUNT; i++){
         for (int j = 0; j < CELL_AMOUNT; j++){
 
-            // Why use switch since it's a boolean array??
-            // FIX
-            // JUST CALL THE FUNCTION AND PUT game->cell_map[foo]
-            // IN THE state PARAMETER OF THE renderState FUNCTION CALL
-            // dumb dumb coding right here
-            switch (game->cell_map[i * CELL_AMOUNT + j])
+            // Get first bit of cell to determine cell_state (dead/alive)
+            Uint8 cell_state = 0x01 & game->cell_map2[i * CELL_AMOUNT + j];
+            switch(cell_state)
             {
             case DEAD:
                 // RENDER BLACK (DEAD) CELL
@@ -91,14 +83,16 @@ void renderCells(SDL_Renderer *renderer, const game_t *game  /*, unsigned int x,
     }
 }
 
-void renderRunningState(SDL_Renderer *renderer, const game_t *game) {
-    // Render grid on top off cells at initial state
-    // Don't render grid, when state != initial state
+void renderRunningState(SDL_Renderer *renderer, const game_t *game, bool state) {
     renderCells(renderer, game);
-    renderGrid(renderer /*, &GRID_COLOR*/ );
-    
+    // If game isn't free running, draw grid
+    if (!state){
+        renderGrid(renderer /*, &GRID_COLOR*/ );
+    }
 }
 
-void renderGame(SDL_Renderer *renderer, const game_t *game){
-    renderRunningState(renderer, game);
+// Why exactly we don't call renderRunningState() here, instead we call
+// it through this function???
+void renderGame(SDL_Renderer *renderer, const game_t *game, bool state){
+    renderRunningState(renderer, game, state);
 }

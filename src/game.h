@@ -1,17 +1,34 @@
+#include <new>
 // CELL & SCREEN DEFINITIONS
-#define GRID_SIZE 10 // CHANGE TO CELL_SIZE later (determines height and width of grid, hardcoded for now, user input later)
-#define CELL_AMOUNT 40 // number of cells
+#define GRID_SIZE 10 // width and height of one cell in pixels
+// #define CELL_AMOUNT 40 // number of cells
 // CELL STATES
 #define DEAD 0 
 #define ALIVE 1
+#define CELL_AMOUNT 40
+const int length_in_bytes = CELL_AMOUNT * CELL_AMOUNT;
 
+/*
+unsigned char *cell_map;
+unsigned char *temp_cell_map;
+
+void createCellMap(){
+    cell_map = new unsigned char[CELL_AMOUNT * CELL_AMOUNT];
+    temp_cell_map = new unsigned char[CELL_AMOUNT * CELL_AMOUNT];
+}
+
+*/
 
 typedef struct {
-    // Only boolean array needed for dead/alive state
-    // Change to Uint8 map where
-    // xxxx0000; x = number of neighbouring cells that are alive
-    // 0000000y; y = current state of cell (dead/alive) 
-    bool cell_map[CELL_AMOUNT * CELL_AMOUNT];
-    // char cell_map[CELL_AMOUNT * CELL_AMOUNT];
+    // Single byte can be used with bit manipulation to
+    // store dead/alive state, and the "alive neighbours"
+    // count;
+    // 000xxxxy; y = current state of cell (dead/alive)
+    //           x = number of neighbouring cells that are alive
+    // CELL_AMOUNT * CELL_AMOUNT
+    
+    unsigned char cell_map2[length_in_bytes];
+    unsigned char cell_map_temp[length_in_bytes];
+    
 
 } game_t;
