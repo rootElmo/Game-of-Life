@@ -8,11 +8,10 @@
 const SDL_Color GRID_COLOR = {.r = 255, .g = 255, .b = 255};
 
 void renderGrid(SDL_Renderer *renderer /*, const SDL_Color * color */){
-    // Get color from a constant later,
-    // hardcoded for now
     SDL_SetRenderDrawColor(renderer, 64, 64, 64, 255);
-    // std::cout << "Render grid called" << std::endl;
     
+    // Draw vertical and horizontal lines
+    // to form the grid
     for (int i = 1; i < CELL_AMOUNT; ++i) {
 
         SDL_RenderDrawLine(renderer,
@@ -26,9 +25,6 @@ void renderGrid(SDL_Renderer *renderer /*, const SDL_Color * color */){
 }
 
 void renderState(SDL_Renderer *renderer, unsigned int x, unsigned int y, bool state){
-    // Check the "math" here before testing
-
-    //std::cout << "Render one cell called" << std::endl;
 
     const float center_x = GRID_SIZE * 0.5 + y * GRID_SIZE;
     const float center_y = GRID_SIZE * 0.5 + x * GRID_SIZE;
@@ -55,8 +51,7 @@ void renderState(SDL_Renderer *renderer, unsigned int x, unsigned int y, bool st
                     color, color, color, 255);
 }
 
-// Render cells from cellmap :)
-// Change function name later to sometihng like "renderMap" etc.
+// Render cells
 void renderCells(SDL_Renderer *renderer, const game_t *game  /*, unsigned int x, unsigned int y */){
 
     for (int i = 0; i < CELL_AMOUNT; i++){
@@ -67,13 +62,9 @@ void renderCells(SDL_Renderer *renderer, const game_t *game  /*, unsigned int x,
             switch(cell_state)
             {
             case DEAD:
-                // RENDER BLACK (DEAD) CELL
-                // renderDeadOrAlive(renderer, row, col, state)
                 renderState(renderer, i, j, 0);
                 break;
             case ALIVE:
-                // RENDER WHITE (WHITE) CELL
-                // renderDeadOrAlive(renderer, row, col, state)
                 renderState(renderer, i, j, 1);
                 break;
             default: {}
@@ -89,10 +80,4 @@ void renderRunningState(SDL_Renderer *renderer, const game_t *game, bool state) 
     if (!state){
         renderGrid(renderer /*, &GRID_COLOR*/ );
     }
-}
-
-// Why exactly we don't call renderRunningState() here, instead we call
-// it through this function???
-void renderGame(SDL_Renderer *renderer, const game_t *game, bool state){
-    renderRunningState(renderer, game, state);
 }

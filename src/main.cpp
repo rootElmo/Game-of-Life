@@ -23,6 +23,7 @@ int main(int argc, char *argv[]){
     // so that window's size can be determined by
     // the amount of cells (N x N)
     SDL_Init(SDL_INIT_VIDEO);
+
     // Create window, size determined by GRID_SIZE and CELL_AMOUNT
     SDL_Window *window = SDL_CreateWindow("Game of Life", 
                                 SDL_WINDOWPOS_UNDEFINED,
@@ -31,7 +32,7 @@ int main(int argc, char *argv[]){
                                 GRID_SIZE * CELL_AMOUNT,
                                 SDL_WINDOW_SHOWN);
 
-    // Check if window init was ok, set running state accordingly
+    // Check if window init was ok
     if (window == NULL){
         std::cout << "Window init failed." << std::endl << SDL_GetError();
         is_running = false;
@@ -43,10 +44,6 @@ int main(int argc, char *argv[]){
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 
                                                 SDL_RENDERER_ACCELERATED /* |
                                                 SDL_RENDERER_PRESENTVSYNC */);  
-                                    // As with almost any game I've played,
-                                    // turning Vsync off drastically improves
-                                    // performance. Don't know why.
-                                    // Investigate?
     
     if (renderer == NULL){
         std::cout << "Renderer init failed." << std::endl << SDL_GetError();
@@ -61,11 +58,13 @@ int main(int argc, char *argv[]){
 
     SDL_Event e;
 
+    // Main event loop
     while (is_running)
     {   
         if (free_runnning){
             // Get milliseconds since SDL was initialized
-            // Quick and dirty timer, but better than SDL_Delay();
+            // Quick and dirty timer, but doesn't freeze the whole
+            // thing like SDL_Delay();
             current_time = SDL_GetTicks();
             if (current_time > (prev_time + TICK_RATE)) {
                 nextGen(&game);
@@ -73,12 +72,12 @@ int main(int argc, char *argv[]){
             }
             
         }
-        // Poll events/main event loop
+        // Poll events
         if (SDL_PollEvent(&e)){
             switch (e.type)
             {
             case SDL_QUIT:
-                // Quite event loop
+                // Quit event loop
                 std::cout << "Quit event." << std::endl;
                 is_running = false;
                 break;
@@ -110,20 +109,21 @@ int main(int argc, char *argv[]){
                     // Try to simplify the if-loop
                     if (free_runnning){
                         free_runnning = false;
+                        std::cout << "Automatic iteration stopped" << std::endl;;
                     } else {
                         free_runnning = true;
+                        std::cout << "Automatic iteration started" << std::endl;;
                     }
-                    std::cout << "State of free_running: " << free_runnning << std::endl;;
                     break;
                 case SDLK_r: // Reset cell_map on R-press
                     for (int i = 0; i < CELL_AMOUNT * CELL_AMOUNT; i++){
                         game.cell_map2[i] = 0;
                     }
+                    std::cout << "Cells reset" << std::endl;
                     // Stop free running on cell map clearing
                     free_runnning = false;
+                    std::cout << "Automatic iteration stopped" << std::endl;;
                     break;
-                // There's a warning here (expected ':'), but compiler
-                // doesn't say a thing about it???
                 default: {}
                     break;
                 }
@@ -135,13 +135,13 @@ int main(int argc, char *argv[]){
             }
         }
 
+        // Render screen
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
-        renderGame(renderer, &game, free_runnning);
+        renderRunningState(renderer, &game, free_runnning);
         // SDL's render functions don't render straight to screen,
         // we need to render the scene from the backbuffer
         // using the below function
-        
         SDL_RenderPresent(renderer);
     }
     // Free up resources allocated to window.

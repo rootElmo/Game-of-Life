@@ -1,12 +1,17 @@
 #include <new>
-// CELL & SCREEN DEFINITIONS
 #define GRID_SIZE 10 // width and height of one cell in pixels
-// #define CELL_AMOUNT 40 // number of cells
-// CELL STATES
 #define DEAD 0 
 #define ALIVE 1
-#define CELL_AMOUNT 40
+#define CELL_AMOUNT 50
 const int length_in_bytes = CELL_AMOUNT * CELL_AMOUNT;
+
+/*
+For the user to be able to determine the board size
+we would need a dynamic array for the cell_map[].
+This can be done at runtime. This could be alot of work
+to change the constants of the current implementation.
+Investigate, see if there's enough time to do it.
+*/
 
 /*
 unsigned char *cell_map;
@@ -30,5 +35,4 @@ typedef struct {
     unsigned char cell_map2[length_in_bytes];
     unsigned char cell_map_temp[length_in_bytes];
     
-
 } game_t;
