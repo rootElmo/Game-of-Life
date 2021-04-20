@@ -18,8 +18,8 @@ void printCellMap(game_t *game){
 }
 
 void setCell(game_t *game, unsigned int row, unsigned int col){
-    // Adapted from https://github.com/armytricks/GameOfLife/blob/master/GameOfLifeSimulation/main.cpp
 
+    // Adapted from https://github.com/armytricks/GameOfLife/blob/master/GameOfLifeSimulation/main.cpp
     int xoleft, xoright, yoabove, yobelow;
     // Calculate offsets to other cells
     xoleft = (row == 0) ? CELL_AMOUNT - 1 : -1;
@@ -43,8 +43,8 @@ void setCell(game_t *game, unsigned int row, unsigned int col){
 }
 
 void clearCell(game_t *game, unsigned int row, unsigned int col){
-    // Adapted from https://github.com/armytricks/GameOfLife/blob/master/GameOfLifeSimulation/main.cpp
 
+    // Adapted from https://github.com/armytricks/GameOfLife/blob/master/GameOfLifeSimulation/main.cpp
     int xoleft, xoright, yoabove, yobelow;
     // Calculate offsets to other cells
     xoleft = (row == 0) ? CELL_AMOUNT - 1 : -1;
@@ -68,6 +68,7 @@ void clearCell(game_t *game, unsigned int row, unsigned int col){
 }
 
 void clickOnCell(game_t *game, unsigned int row, unsigned int col){
+
     // Toggle cell on if dead/toggle cell off if alive
     if (0x01 & game->cell_map2[col * CELL_AMOUNT + row]){
         clearCell(game, row, col);
@@ -78,9 +79,9 @@ void clickOnCell(game_t *game, unsigned int row, unsigned int col){
 
 // Calculate cell states for next generation
 void nextGen(game_t *game){
+
     unsigned int x, y, count;
     int cell_pos = 0;
-
     /*
     Currently function goes over EVERY cell.
     Figure a way to skip cells which are dead
@@ -109,7 +110,6 @@ void nextGen(game_t *game){
             }
         }
     }
-
     /*
     // Cell scanning implementation from https://github.com/armytricks/GameOfLife/blob/master/GameOfLifeSimulation/main.cpp
     // for some readon didn't work? Leave here for future reference

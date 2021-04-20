@@ -8,10 +8,10 @@
 const SDL_Color GRID_COLOR = {.r = 255, .g = 255, .b = 255};
 
 void renderGrid(SDL_Renderer *renderer /*, const SDL_Color * color */){
+    
     SDL_SetRenderDrawColor(renderer, 64, 64, 64, 255);
     
-    // Draw vertical and horizontal lines
-    // to form the grid
+    // Draw vertical and horizontal lines to form the grid
     for (int i = 1; i < CELL_AMOUNT; ++i) {
 
         SDL_RenderDrawLine(renderer,
@@ -21,7 +21,6 @@ void renderGrid(SDL_Renderer *renderer /*, const SDL_Color * color */){
                            0,   i * GRID_SIZE,
                            GRID_SIZE * CELL_AMOUNT, i * GRID_SIZE);
     }
-    
 }
 
 void renderState(SDL_Renderer *renderer, unsigned int x, unsigned int y, bool state){
@@ -37,13 +36,7 @@ void renderState(SDL_Renderer *renderer, unsigned int x, unsigned int y, bool st
         color = 0;
     }
 
-    // Compile error, since I haven't put the lib in the command
-    // Investigate on how to include the sdl2_gfx primitives
-    // Time to make a Makefile? Or something similiar?
-    // ^^^^^ pkg-config --list-all | grep *keyword*
-    // ^^^^^ to search for libraries to include.
-
-    // Draw filled box
+    // Draw filled box for a cell
     boxRGBA(renderer, center_x - half_cell, // +1
                     center_y - half_cell, // +1
                     center_x + half_cell, // -1

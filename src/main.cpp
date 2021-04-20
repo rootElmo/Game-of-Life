@@ -15,7 +15,6 @@ bool free_runnning = false;
 unsigned int prev_time = 0;
 unsigned int current_time;
 
-
 int main(int argc, char *argv[]){
 
     // Search for a way to ask user for
@@ -44,7 +43,6 @@ int main(int argc, char *argv[]){
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 
                                                 SDL_RENDERER_ACCELERATED /* |
                                                 SDL_RENDERER_PRESENTVSYNC */);  
-    
     if (renderer == NULL){
         std::cout << "Renderer init failed." << std::endl << SDL_GetError();
         is_running = false;
@@ -70,18 +68,21 @@ int main(int argc, char *argv[]){
                 nextGen(&game);
                 prev_time = current_time;
             }
-            
         }
         // Poll events
         if (SDL_PollEvent(&e)){
+
             switch (e.type)
             {
+
             case SDL_QUIT:
+
                 // Quit event loop
                 std::cout << "Quit event." << std::endl;
                 is_running = false;
                 break;
             case SDL_MOUSEBUTTONDOWN:{
+
                 // Get mouse click coordinates & print them.
                 // Later check coordinates against cell and toggle alive/dead.
                 if (free_runnning){
@@ -97,6 +98,7 @@ int main(int argc, char *argv[]){
                 switch (e.key.keysym.sym)
                 {
                 case SDLK_RIGHT:
+
                     // Generation++
                     if (free_runnning){
                         break;
@@ -104,6 +106,7 @@ int main(int argc, char *argv[]){
                     nextGen(&game);
                     break;
                 case SDLK_SPACE:
+
                     // tried free_running != free_running here,
                     // didn't work for some reason?
                     // Try to simplify the if-loop

@@ -34,5 +34,4 @@ typedef struct {
     
     unsigned char cell_map2[length_in_bytes];
     unsigned char cell_map_temp[length_in_bytes];
-    
 } game_t;
